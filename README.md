@@ -22,3 +22,4 @@ The primary current driver is mining the 1.5 million scholarly articles per year
 and similar outputs. There are deliberately no attempts to restrict access to intermediate components or outputs so users of confidential material should be
 aware of this.
 
+The initial development will take place on Bitbucket (http://bitbucket.org/petermr) as the rest of the Java code is there. We expect to port to Github when it makes sense.
