@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.xmlcml.norma.document.hindawi.HindawiTaggerTest
 -------------------------------------------------------------------------------
-Tests run: 10, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 1.635 sec
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 1.686 sec
