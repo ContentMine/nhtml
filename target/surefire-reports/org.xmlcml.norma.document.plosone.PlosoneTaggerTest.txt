@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.xmlcml.norma.document.plosone.PlosoneTaggerTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 11.133 sec
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 9.279 sec

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="1.69" errors="0" skipped="2" tests="10" name="org.xmlcml.norma.document.hindawi.HindawiTaggerTest">
+<testsuite failures="0" time="1.64" errors="0" skipped="2" tests="10" name="org.xmlcml.norma.document.hindawi.HindawiTaggerTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre/lib"/>
@@ -21,7 +21,7 @@
     <property name="basedir" value="/Users/pm286/workspace/nhtml"/>
     <property name="java.endorsed.dirs" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre/lib/endorsed"/>
     <property name="os.arch" value="x86_64"/>
-    <property name="surefire.real.class.path" value="/Users/pm286/workspace/nhtml/target/surefire/surefirebooter2693083646983970883.jar"/>
+    <property name="surefire.real.class.path" value="/Users/pm286/workspace/nhtml/target/surefire/surefirebooter2337939840752976880.jar"/>
     <property name="java.io.tmpdir" value="/var/folders/mk/8gdp1fg15zsgym6rmchb36gh0000gp/T/"/>
     <property name="line.separator" value="
 "/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/jre"/>
-    <property name="sun.java.command" value="/Users/pm286/workspace/nhtml/target/surefire/surefirebooter2693083646983970883.jar /Users/pm286/workspace/nhtml/target/surefire/surefire2632593001329828480tmp /Users/pm286/workspace/nhtml/target/surefire/surefire7065233968767278128tmp"/>
+    <property name="sun.java.command" value="/Users/pm286/workspace/nhtml/target/surefire/surefirebooter2337939840752976880.jar /Users/pm286/workspace/nhtml/target/surefire/surefire3065549544469076152tmp /Users/pm286/workspace/nhtml/target/surefire/surefire7369751444167112678tmp"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -64,18 +64,18 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.143" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testMetadataDefinitions"/>
+  <testcase time="0.145" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testMetadataDefinitions"/>
   <testcase time="0.008" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testTagDefinitions"/>
-  <testcase time="0.007" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testXSLStylsheets"/>
-  <testcase time="0.905" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testGrouping"/>
-  <testcase time="0.005" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testVariables"/>
-  <testcase time="0.006" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testExpandVariables">
+  <testcase time="0.008" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testXSLStylsheets"/>
+  <testcase time="0.846" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testGrouping"/>
+  <testcase time="0.006" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testVariables"/>
+  <testcase time="0.007" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testExpandVariables">
     <skipped/>
   </testcase>
-  <testcase time="0.006" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testExpandTags">
+  <testcase time="0.007" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testExpandTags">
     <skipped/>
   </testcase>
-  <testcase time="0.084" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testMetadataExtraction"/>
-  <testcase time="0.105" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testSectionTagging"/>
-  <testcase time="0.42" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="test247835"/>
+  <testcase time="0.081" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testMetadataExtraction"/>
+  <testcase time="0.101" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="testSectionTagging"/>
+  <testcase time="0.433" classname="org.xmlcml.norma.document.hindawi.HindawiTaggerTest" name="test247835"/>
 </testsuite>
