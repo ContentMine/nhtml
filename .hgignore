@@ -1,0 +1,8 @@
+^.project$
+^.settings/
+^.classpath$
+^.hgignore~$
+^.git/
+^target/.*
+/target/
+^\.idea/
