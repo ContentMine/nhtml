@@ -7,6 +7,8 @@ import java.util.ListIterator;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.xmlcml.args.ArgumentOption;
+import org.xmlcml.args.DefaultArgProcessor;
 
 /** 
  * Processes commandline arguments.
@@ -21,17 +23,26 @@ public class NormaArgProcessor extends DefaultArgProcessor{
 	}
 	
 	public final static String HELP_NORMA = "Norma help";
+	
+	public final static ArgumentOption PUBSTYLE_OPTION = new ArgumentOption(
+		"-p",
+		"--pubstyle",
+		"pub_code",
+		"\n"
+		+ "PUBSTYLE:\nCode or mnemomic to identifier the publisher or journal style. \n"
+		+ "this is a list of journal/publisher styles so Norma knows how to interpret the input. At present only one argument \n"
+		+ "is allowed. The pubstyle determines the format of the XML or HTML, the metadata, and\n"
+		+ "soon how to parse the PDF. At present we'll use mnemonics such as 'bmc' or 'biomedcentral.com' or 'cellpress'.\n"
+		+ "To get a list of these use "+"--pubstyle"+" without arguments. Note: under early development and note also that \n"
+		+ "publisher styles change and can be transferred between publishers and journals",
+		String.class,
+		Pubstyle.PLOSONE.toString(),
+		1, 1
+		);
+	
+	private List<String> pubstyleList;
 
-	public static final String J = "-j";
-	public static final String JOURNAL = "--journal";
-	public static final String JOURNAL_HELP = "\n"
-			+ "JOURNAL:\nName or code of journal or publisher. \n"
-			+ "this is a list of journals so Norma knows how to interpret the input. At present only \n"
-			+ "one is allowed. The journal/s determine the format of the XML or HTML, the metadata, and\n"
-			+ "soon how to parse the PDF. At present we'll use mnemonics such as 'bmc' or 'biomedcentral.com'\n"
-			+ "to get a list of these use "+JOURNAL+" without arguments";
-
-	private List<String> journalList;
+	private Pubstyle pubstyle;
 
 	public NormaArgProcessor() {
 		super();
@@ -58,15 +69,21 @@ public class NormaArgProcessor extends DefaultArgProcessor{
 		return parsed;
 	}
 	
+//	protected void applyDefaults() {
+//		super.applyDefaults();
+//		pubstyleList = PUBSTYLE_OPTION.getDefaults().getDefaultStrings();
+//	}
+
 	protected boolean parseArgs1(ListIterator<String> listIterator) {
 		boolean processed = false;
 		if (listIterator.hasNext()) {
 			processed = true;
 			String arg = listIterator.next();
+			LOG.trace("norma:"+arg);
 			if (!arg.startsWith(MINUS)) {
 				LOG.error("Parsing failed at: ("+arg+"), expected \"-\" trying to recover");
-			} else if (J.equals(arg) || JOURNAL.equals(arg)) {
-				processJournal(listIterator); 
+			} else if (PUBSTYLE_OPTION.matches(arg)) {
+				processPubstyle(PUBSTYLE_OPTION, listIterator); 
 			} else {
 				processed = false;
 				LOG.error("Unknown arg: ("+arg+"), trying to recover");
@@ -75,24 +92,33 @@ public class NormaArgProcessor extends DefaultArgProcessor{
 		return processed;
 	}
 
-	private void processJournal(ListIterator<String> listIterator) {
+	private void processPubstyle(ArgumentOption argOption, ListIterator<String> listIterator) {
 		List<String> inputs = createTokenListUpToNextMinus(listIterator);
 		if (inputs.size() == 0) {
-			journalList = new ArrayList<String>();
-			LOG.error("Must give at least one journal (currently only one). Current options are:");
-			for (Journal journal : Journal.getJournals()) {
-				System.err.println("> "+journal.toString());
-			}
-			
+			pubstyleList = new ArrayList<String>();
+			Pubstyle.help();
 		} else {
-			journalList = inputs;
+			String name = argOption.processArgs(inputs).getString();
+			pubstyle = Pubstyle.getPubstyle(name);
 		}
 	}
 
 	protected void processHelp() {
+		System.out.println(
+				"\n"
+				+ "====NORMA====\n"
+				+ "Norma converters raw files into scholarlyHTML, and adds tags to sections.\n"
+				+ "Some of the conversion is dependent on publication type (--pubstyle) while some\n"
+				+ "is constant for all documents. Where possible Norma guesses the input type, but can\n"
+				+ "also be guided with the --extensions flag where the file/URL has no extension. "
+				+ ""
+				);
+		System.out.println(PUBSTYLE_OPTION.getHelp());
 		super.processHelp();
-		LOG.info(HELP_NORMA);
 	}
 
+	public Pubstyle getPubstyle() {
+		return pubstyle;
+	}
 
 }

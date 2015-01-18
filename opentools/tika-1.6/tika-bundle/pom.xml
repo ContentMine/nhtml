@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.apache.tika</groupId>
+    <artifactId>tika-parent</artifactId>
+    <version>1.6</version>
+    <relativePath>../tika-parent/pom.xml</relativePath>
+  </parent>
+
+  <artifactId>tika-bundle</artifactId>
+  <packaging>bundle</packaging>
+  <name>Apache Tika OSGi bundle</name>
+  <description>
+    OSGi bundle that contains the tika-parsers component and all its
+    upstream dependencies that aren't OSGI bundles by themselves. This
+    bundle exports no packages, only the Parser and Detector services
+    from the tika-parsers component.
+  </description>
+  <url>http://tika.apache.org/</url>
+
+  <properties>
+    <pax.exam.version>2.2.0</pax.exam.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>tika-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>tika-parsers</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Test dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.exam</groupId>
+      <artifactId>pax-exam-junit4</artifactId>
+      <version>${pax.exam.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.exam</groupId>
+      <artifactId>pax-exam-container-native</artifactId>
+      <version>${pax.exam.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.framework</artifactId>
+      <version>4.0.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.exam</groupId>
+      <artifactId>pax-exam-link-assembly</artifactId>
+      <version>${pax.exam.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.url</groupId>
+      <artifactId>pax-url-aether</artifactId>
+      <version>1.3.3</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.6.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Bundle-Activator>
+              org.apache.tika.parser.internal.Activator
+            </Bundle-Activator>
+            <Embed-Dependency>
+              tika-parsers;inline=true,
+              commons-compress, xz, commons-codec,
+              pdfbox,fontbox,jempbox,bcmail-jdk15,bcprov-jdk15,
+              poi,poi-scratchpad,poi-ooxml,poi-ooxml-schemas,
+              xmlbeans,
+              tagsoup,
+              asm-debug-all,
+              juniversalchardet,
+              vorbis-java-core, vorbis-java-tika,
+              isoparser, aspectjrt,
+              metadata-extractor, xmpcore,
+              boilerpipe, rome,
+              apache-mime4j-core, apache-mime4j-dom,
+              jhighlight, java-libpst,
+              netcdf, jcip-annotations, jmatio
+            </Embed-Dependency>
+            <Embed-Transitive>true</Embed-Transitive>
+            <Bundle-DocURL>${project.url}</Bundle-DocURL>
+            <Export-Package>
+              !org.apache.tika.parser,
+              !org.apache.tika.parser.external,
+              org.apache.tika.parser.*
+            </Export-Package>
+            <Import-Package>
+			  !org.junit,
+              *,
+              android.util;resolution:=optional,
+              com.adobe.xmp;resolution:=optional,
+              com.adobe.xmp.properties;resolution:=optional,
+              com.google.protobuf;resolution:=optional,
+              com.ibm.icu.text;resolution:=optional,
+              com.sleepycat.je;resolution:=optional,
+              com.sun.javadoc;resolution:=optional,
+              com.sun.msv.datatype;resolution:=optional,
+              com.sun.msv.datatype.xsd;resolution:=optional,
+              com.sun.tools.javadoc;resolution:=optional,
+              edu.wisc.ssec.mcidas;resolution:=optional,
+              edu.wisc.ssec.mcidas.adde;resolution:=optional,
+              javax.activation;resolution:=optional,
+              javax.mail;resolution:=optional,
+              javax.mail.internet;resolution:=optional,
+              javax.servlet;resolution:=optional,
+              javax.servlet.http;resolution:=optional,
+              javax.xml.bind;resolution:=optional,
+              javax.xml.stream;version="[1.0,2)";resolution:=optional,
+              javax.xml.stream.events;version="[1.0,2)";resolution:=optional,
+              javax.xml.stream.util;version="[1.0,2)";resolution:=optional,
+              junit.framework;resolution:=optional,
+              junit.textui;resolution:=optional,
+              net.sf.ehcache;resolution:=optional,
+              nu.xom;resolution:=optional,
+              opendap.dap.http;resolution:=optional,
+              opendap.dap;resolution:=optional,
+              opendap.dap.parser;resolution:=optional,
+              org.apache.commons.httpclient;resolution:=optional,
+              org.apache.commons.httpclient.auth;resolution:=optional,
+              org.apache.commons.httpclient.methods;resolution:=optional,
+              org.apache.commons.httpclient.params;resolution:=optional,
+              org.apache.commons.httpclient.protocol;resolution:=optional,
+              org.apache.commons.httpclient.util;resolution:=optional,
+              org.apache.crimson.jaxp;resolution:=optional,
+              org.apache.tools.ant;resolution:=optional,
+              org.apache.tools.ant.taskdefs;resolution:=optional,
+              org.apache.tools.ant.types;resolution:=optional,
+              org.apache.xerces.parsers;resolution:=optional,
+              org.apache.xerces.util;resolution:=optional,
+              org.apache.xerces.xni;resolution:=optional,
+              org.apache.xerces.xni.parser;resolution:=optional,
+              org.apache.xml.resolver;resolution:=optional,
+              org.apache.xml.resolver.tools;resolution:=optional,
+              org.apache.xmlbeans.impl.xpath.saxon;resolution:=optional,
+              org.apache.xmlbeans.impl.xquery.saxon;resolution:=optional,
+              org.cyberneko.html.xercesbridge;resolution:=optional,
+              org.gjt.xpp;resolution:=optional,
+              org.jaxen;resolution:=optional,
+              org.jaxen.dom4j;resolution:=optional,
+              org.jaxen.pattern;resolution:=optional,
+              org.jaxen.saxpath;resolution:=optional,
+              org.jdom;resolution:=optional,
+              org.jdom.input;resolution:=optional,
+              org.jdom.output;resolution:=optional,
+              org.openxmlformats.schemas.officeDocument.x2006.math;resolution:=optional,
+              org.openxmlformats.schemas.schemaLibrary.x2006.main;resolution:=optional,
+              org.osgi.framework;resolution:=optional,
+              org.quartz;resolution:=optional,
+              org.quartz.impl;resolution:=optional,
+              org.w3c.dom;resolution:=optional,
+              org.relaxng.datatype;resolution:=optional,
+              org.xml.sax;resolution:=optional,
+              org.xml.sax.ext;resolution:=optional,
+              org.xml.sax.helpers;resolution:=optional,
+              org.xmlpull.v1;resolution:=optional,
+              schemasMicrosoftComOfficePowerpoint;resolution:=optional,
+              schemasMicrosoftComOfficeWord;resolution:=optional,
+              sun.misc;resolution:=optional,
+              ucar.grib;resolution:=optional,
+              ucar.grib.grib1;resolution:=optional,
+              ucar.grib.grib2;resolution:=optional,
+              ucar.grid;resolution:=optional,
+              ucar.unidata.geoloc;resolution:=optional,
+              ucar.unidata.geoloc.projection;resolution:=optional,
+              ucar.unidata.geoloc.projection.proj4;resolution:=optional,
+              ucar.unidata.geoloc.projection.sat;resolution:=optional,
+              ucar.unidata.io;resolution:=optional,
+              ucar.unidata.util;resolution:=optional,
+              com.jmatio.io;resolution:=optional,
+              visad;resolution:=optional,
+              visad.data;resolution:=optional,
+              visad.data.vis5d;resolution:=optional,
+              visad.jmet;resolution:=optional,
+              visad.util;resolution:=optional
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <!-- TIKA-763: Workaround to avoid including LGPL classes -->
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeArtifactIds>netcdf</includeArtifactIds>
+              <excludes>
+                ucar/nc2/iosp/fysat/Fysat*.class,
+                ucar/nc2/dataset/transform/VOceanSG1*class,
+                ucar/unidata/geoloc/vertical/OceanSG*.class,
+                META-INF/**,CHANGES,README
+              </excludes>
+              <outputDirectory>
+                ${project.build.directory}/classes
+              </outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- The Tika Bundle has no java code of its own, so no need to do -->
+      <!--  any forbidden API checking against it (it gets confused...) -->
+      <plugin>
+        <groupId>de.thetaphi</groupId>
+        <artifactId>forbiddenapis</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>java6</id>
+      <activation>
+        <jdk>[1.6,)</jdk>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+              <execution>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+                <configuration>
+                  <descriptor>test-bundles.xml</descriptor>
+                  <finalName>test</finalName>
+                  <attach>false</attach>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>2.10</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+             <systemPropertyVariables>
+               <org.ops4j.pax.logging.DefaultServiceLog.level>
+                 WARN
+               </org.ops4j.pax.logging.DefaultServiceLog.level>
+             </systemPropertyVariables>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <organization>
+  	<name>The Apache Software Founation</name>
+  	<url>http://www.apache.org</url>
+  </organization>
+  <scm>
+  	<url>http://svn.apache.org/viewvc/tika/tags/1.6-rc2/tika-bundle</url>
+  	<connection>scm:svn:http://svn.apache.org/repos/asf/tika/tags/1.6-rc2/tika-bundle</connection>
+  	<developerConnection>scm:svn:https://svn.apache.org/repos/asf/tika/tags/1.6-rc2/tika-bundle</developerConnection>
+  </scm>
+  <issueManagement>
+  	<system>JIRA</system>
+  	<url>https://issues.apache.org/jira/browse/TIKA</url>
+  </issueManagement>
+  <ciManagement>
+  	<system>Jenkins</system>
+  	<url>https://builds.apache.org/job/Tika-trunk/</url>
+  </ciManagement>
+</project>

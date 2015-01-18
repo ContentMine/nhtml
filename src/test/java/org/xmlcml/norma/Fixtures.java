@@ -7,13 +7,18 @@ public class Fixtures {
 	public final static File MAIN_NORMA_DIR = new File("src/main/resources/org/xmlcml/norma/");
 	public final static File MAIN_STYLE_DIR = new File(Fixtures.MAIN_NORMA_DIR, "style");
 	public final static File MINI_XSL = new File(Fixtures.MAIN_STYLE_DIR, "miniTest.xsl");
-	public final static File MAIN_DOCUMENT_DIR = new File(Fixtures.MAIN_NORMA_DIR, "document");
+	public final static File MAIN_DOCUMENT_DIR = new File(Fixtures.MAIN_NORMA_DIR, "pubstyle");
 	public final static File MAIN_HINDAWI_DIR = new File(Fixtures.MAIN_DOCUMENT_DIR, "hindawi");
 	public final static File GROUP_MAJOR_SECTIONS_XSL = new File(Fixtures.MAIN_HINDAWI_DIR, "groupMajorSections.xsl");
 
 	public final static File TEST_NORMA_DIR = new File("src/test/resources/org/xmlcml/norma/");
-	public final static File TEST_DOCUMENT_DIR = new File(Fixtures.TEST_NORMA_DIR, "document");
+	public final static File TEST_DOCUMENT_DIR = new File(Fixtures.TEST_NORMA_DIR, "pubstyle");
 	public final static File TEST_HINDAWI_DIR = new File(Fixtures.TEST_DOCUMENT_DIR, "hindawi");
+	public final static File TEST_BMC_DIR = new File(Fixtures.TEST_DOCUMENT_DIR, "bmc");
+	public final static File TEST_SEDAR_DIR = new File(Fixtures.TEST_DOCUMENT_DIR, "sedar");
+	public final static File TEST_ASTROPHYS_DIR = new File(Fixtures.TEST_DOCUMENT_DIR, "astrophysj");
+	
+	public static final File BMC_0277_PDF = new File(Fixtures.TEST_BMC_DIR, "s12862-014-0277-x.pdf");
 	
 	public final static File F507405_HTML = new File(Fixtures.TEST_HINDAWI_DIR, "507405.html");
 	public final static File F507405_XML = new File(Fixtures.TEST_HINDAWI_DIR, "507405.xml");
@@ -31,6 +36,7 @@ public class Fixtures {
 	public final static File TEST_STYLE_DIR = new File(Fixtures.TEST_NORMA_DIR, "style");
 	public final static File XSLT2_TEST1_XML = new File(Fixtures.TEST_STYLE_DIR, "xslt2Test1.xml");
 	public final static File XSLT2_TEST1_XSL = new File(Fixtures.TEST_STYLE_DIR, "xslt2Test1.xsl");
+	
 	
 	
 }
